@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZETA - Your Personal Science Ecosystem</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <div class="logo-container">
+                <h1 class="logo">ZETA</h1>
+                <p class="tagline">Your Personal Science Ecosystem</p>
+            </div>
+            
+            <div class="login-tabs">
+                <button class="tab-btn active" onclick="switchTab('user')">User Login</button>
+                <button class="tab-btn" onclick="switchTab('admin')">Admin Login</button>
+            </div>
+
+            <!-- User Login Form -->
+            <form id="userLoginForm" class="login-form active" onsubmit="loginUser(event)">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="userName" placeholder="Enter your name" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Enter ZETA</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </form>
+
+            <!-- Admin Login Form -->
+            <form id="adminLoginForm" class="login-form" onsubmit="loginAdmin(event)">
+                <div class="form-group">
+                    <label>Admin ID</label>
+                    <input type="text" id="adminId" placeholder="Enter admin ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Admin Access</span>
+                    <span class="btn-icon">🔒</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Website -->
+    <div id="mainWebsite" class="hidden">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-logo">ZETA</h1>
+                <div class="nav-links">
+                    <a href="#papers" class="nav-link">Papers</a>
+                    <a href="#youtube" class="nav-link">YouTube</a>
+                    <a href="#apps" class="nav-link">Apps</a>
+                    <a href="#help" class="nav-link">Help</a>
+                    <button id="adminBtn" class="btn-admin hidden" onclick="openAdminPanel()">
+                        👨‍💼 Admin Panel
+                    </button>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">ZETA</h1>
+                <p class="hero-subtitle">"Explore. Learn. Innovate. Transform."</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="paperCount">0</span>
+                        <span class="stat-label">Research Papers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="channelCount">0</span>
+                        <span class="stat-label">YouTube Channels</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="appCount">0</span>
+                        <span class="stat-label">Apps Available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Papers Section -->
+        <section id="papers" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">📚</span>
+                        Latest Research Papers
+                    </h2>
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search papers..." onkeyup="searchPapers()">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </div>
+                <div class="papers-grid" id="papersGrid"></div>
+                <button id="showMoreBtn" class="btn btn-secondary hidden" onclick="toggleShowMore()">
+                    Show More Papers
+                </button>
+            </div>
+        </section>
+
+        <!-- YouTube Section -->
+        <section id="youtube" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-icon">📺</span>
+                    Featured YouTube Channels
+                </h2>
+                <div class="youtube-grid" id="youtubeGrid"></div>
+            </div>
+        </section>
+
+        <!-- Apps Section -->
+        <section id="apps" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-icon">💾</span>
+                    ZETA Apps & Tools
+                </h2>
+                <div class="apps-grid" id="appsGrid"></div>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        <section id="help" class="section help-section">
+            <div class="container">
+                <div class="help-content">
+                    <h2>
+                        <span style="font-size: 42px; margin-right: 15px;">❓</span>
+                        Need Help?
+                    </h2>
+                    <p>Get support and find answers to frequently asked questions</p>
+                    <div class="help-buttons">
+                        <a href="#" class="btn-help" onclick="showNotification('FAQ will be available soon!', 'success'); return false;">
+                            📖 View FAQ
+                        </a>
+                        <a href="mailto:support@zeta.com" class="btn-email">
+                            📧 Email Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>ZETA</h3>
+                    <p>Your Personal Science Ecosystem - Connecting education, research, and innovation</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#papers">Research Papers</a></li>
+                        <li><a href="#youtube">YouTube Channels</a></li>
+                        <li><a href="#apps">Apps & Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#" onclick="showNotification('Privacy Policy coming soon!', 'success'); return false;">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showNotification('Terms of Service coming soon!', 'success'); return false;">Terms of Service</a></li>
+                        <li><a href="#" onclick="showNotification('Cookie Policy coming soon!', 'success'); return false;">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📧 support@zeta.com</li>
+                        <li>💬 feedback@zeta.com</li>
+                        <li>🌐 www.zeta.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 ZETA. All rights reserved. | Made with ❤️ by Vivek Gundu</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel hidden">
+        <div class="admin-header">
+            <h1>👨‍💼 Admin Panel</h1>
+            <button class="btn-cancel" onclick="closeAdminPanel()">Back to Website</button>
+        </div>
+
+        <div class="admin-content">
+            <!-- Add Paper Section -->
+            <div class="admin-section">
+                <h2><span>📚</span> Add Research Paper</h2>
+                <div class="form-group">
+                    <label>Paper Title</label>
+                    <input type="text" id="adminPaperTitle" placeholder="Enter paper title">
+                </div>
+                <div class="form-group">
+                    <label>Photo URL (from Supabase)</label>
+                    <input type="text" id="adminPaperPhoto" placeholder="https://your-supabase-url/storage/v1/...">
+                </div>
+                <div class="form-group">
+                    <label>Paper Script/Text</label>
+                    <textarea id="adminPaperScript" rows="6" placeholder="Enter paper content/abstract..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>PDF URL (Optional - from Supabase)</label>
+                    <input type="text" id="adminPaperPdf" placeholder="https://your-supabase-url/storage/v1/...">
+                </div>
+                <button class="btn-add" onclick="addPaper()">Add Paper</button>
+            </div>
+
+            <!-- Manage Papers -->
+            <div class="admin-section">
+                <h2><span>📋</span> Manage Papers</h2>
+                <div id="managePapersList"></div>
+            </div>
+
+            <!-- Add YouTube Channel -->
+            <div class="admin-section">
+                <h2><span>📺</span> Add YouTube Channel</h2>
+                <div class="form-group">
+                    <label>Channel Name</label>
+                    <input type="text" id="adminChannelName" placeholder="Enter channel name">
+                </div>
+                <div class="form-group">
+                    <label>Channel Photo URL (from Supabase)</label>
+                    <input type="text" id="adminChannelPhoto" placeholder="https://your-supabase-url/storage/v1/...">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="adminChannelDesc" rows="3" placeholder="Enter channel description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Channel URL</label>
+                    <input type="text" id="adminChannelUrl" placeholder="https://youtube.com/@channel">
+                </div>
+                <button class="btn-add" onclick="addChannel()">Add Channel</button>
+            </div>
+
+            <!-- Manage Channels -->
+            <div class="admin-section">
+                <h2><span>📋</span> Manage Channels</h2>
+                <div id="manageChannelsList"></div>
+            </div>
+
+            <!-- Add App -->
+            <div class="admin-section">
+                <h2><span>💾</span> Add App</h2>
+                <div class="form-group">
+                    <label>App Name</label>
+                    <input type="text" id="adminAppName" placeholder="Enter app name">
+                </div>
+                <div class="form-group">
+                    <label>Features (comma separated)</label>
+                    <textarea id="adminAppFeatures" rows="3" placeholder="Feature 1, Feature 2, Feature 3..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Download URL</label>
+                    <input type="text" id="adminAppUrl" placeholder="https://download-link.com">
+                </div>
+                <button class="btn-add" onclick="addApp()">Add App</button>
+            </div>
+
+            <!-- Manage Apps -->
+            <div class="admin-section">
+                <h2><span>📋</span> Manage Apps</h2>
+                <div id="manageAppsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paper Detail Modal -->
+    <div id="paperModal" class="modal hidden" onclick="closePaperModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closePaperModal()">×</button>
+            <div id="paperModalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
